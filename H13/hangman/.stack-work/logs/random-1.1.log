@@ -1,0 +1,13 @@
+Configuring random-1.1...
+Preprocessing library for random-1.1..
+Building library for random-1.1..
+[1 of 1] Compiling System.Random    ( System\Random.hs, .stack-work\dist\5c8418a7\build\System\Random.o )
+
+System\Random.hs:43:1: warning: [-Wtabs]
+    Tab character found here, and in 74 further locations.
+    Please use spaces instead.
+   |
+43 |         (
+   | ^^^^^^^^
+Installing library in C:\sr\snapshots\0eca25ce\lib\x86_64-windows-ghc-8.2.2\random-1.1-LLUGZ7T9DqQ5vN0Jbcd0We
+Registering library for random-1.1..
