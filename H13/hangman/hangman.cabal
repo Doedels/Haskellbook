@@ -2,7 +2,7 @@ name:                hangman
 version:             0.1.0.0
 synopsis:            playing hangman
 -- description:
-homepage:            https://github.com/githubuser/hangman#readme
+homepage:            https://github.com/Doedels/Haskellbook/H13/hangman#readme
 license:             BSD3
 license-file:        LICENSE
 author:              Sander Markies
