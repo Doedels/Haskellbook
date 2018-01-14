@@ -44,6 +44,8 @@ genFirst = do
   x <- arbitrary
   frequency [ (1, return (First' Nada))
             , (10, return (First' (Only x) ) ) ]
+-- to get a sample of arbitrary values, use in ghci:
+-- sample (genFirst :: Gen (First' Int))
 
 instance Arbitrary a => Arbitrary (First' a) where
   arbitrary = genFirst
