@@ -93,11 +93,29 @@ instance Arbitrary BoolDisj where
 
 type BoolDisjAssoc = BoolDisj -> BoolDisj -> BoolDisj -> Bool
 
--- 6
+-- 6 Combine a b does NOT take two arguments, but ONE that is a function a -> b
+newtype Combine a b = Combine { unCombine :: (a -> b) }
 
+instance (Semigroup a, Semigroup b) => Semigroup (Combine a b) where
+  Combine f <> Combine g = Combine (\a -> f a <> g a)
+
+instance (Monoid b) => Monoid (Combine a b) where
+  mempty = Combine (\_ -> mempty)
+  Combine f `mappend` Combine g = Combine (\a -> f a `mappend` g a)
 
 -- 7
+newtype Comp a = Comp { unComp :: (a -> a) }
 
+instance Semigroup a => Semigroup (Comp a) where
+  Comp f <> Comp g = Comp (f . g)
+
+instance Monoid a => Monoid (Comp a) where
+  mempty = Comp (\_ -> mempty)
+  Comp f `mappend` Comp g = Comp (f . g)
+
+{-
+Skipped the test for exercises 6 and 8
+-}
 
 -- *******************************************
 semigroupAssoc :: (Eq m, Semigroup m) => m -> m -> m -> Bool

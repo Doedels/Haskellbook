@@ -128,6 +128,22 @@ instance (Arbitrary a, Arbitrary b) => Arbitrary (Or a b) where
 
 type OrAssoc = Or Int Int -> Or Int Int -> Or Int Int -> Bool
 
+-- 9 Combine a b does NOT take two arguments, but ONE that is a function a -> b
+newtype Combine a b = Combine { unCombine :: (a -> b) }
+
+instance (Semigroup b) => Semigroup (Combine a b) where
+  Combine f <> Combine g = Combine (\a -> f a <> g a)
+
+-- 10
+newtype Comp a = Comp { unComp :: (a -> a) }
+
+instance Semigroup a => Semigroup (Comp a) where
+  Comp f <> Comp g = Comp (f . g)
+
+{-
+Skipped the test for exercises 9 and 10
+-}
+
 -- *******************************************
 semigroupAssoc :: (Eq m, Semigroup m) => m -> m -> m -> Bool
 semigroupAssoc a b c = (a <> (b <> c)) == ((a <> b) <> c)
