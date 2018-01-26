@@ -241,8 +241,11 @@ instance (Eq a, Eq b) => EqProp (Four' a b) where
 
 main :: IO ()
 main = do
-  quickBatch (functor (Pair ("a", 'b', 1 :: Int) ("a", 'b', 1 :: Int)))
-  quickBatch (applicative (Pair ("a", 'b', 1 :: Int) ("a", 'b', 1 :: Int)))
+  -- quickBatch (functor (Pair ("a", 'b', 1 :: Int) ("a", 'b', 1 :: Int)))
+  -- quickBatch (applicative (Pair ("a", 'b', 1 :: Int) ("a", 'b', 1 :: Int)))
+  -- or:
+  quickBatch (functor (undefined :: Pair (String, Int, Bool)))
+  quickBatch (applicative (undefined :: Pair (String, Int, Bool)))
 
   quickBatch (functor (Two "a" ("a", 'b', 1 :: Int)))
   quickBatch (applicative (Two "a" ("a", 'b', 1 :: Int)))
