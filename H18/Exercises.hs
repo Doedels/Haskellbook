@@ -127,8 +127,8 @@ instance Monad List where
 
 genCons :: Arbitrary a => Gen (List a)
 genCons = do
-  x <- arbitrary
-  return (Cons x Nil)
+  xs <- listOf arbitrary
+  pure (foldr Cons Nil xs)
 
 instance Arbitrary a => Arbitrary (List a) where
   arbitrary = frequency [(1, pure Nil), (10, genCons)]
@@ -148,10 +148,10 @@ main = do
 -- Write the following functions using methods provided by Monad and Functor
 -- 1
 j :: Monad m => m (m a) -> m a
-j = join
+j mma = mma >>= id -- join
 -- 2
 l1 :: Monad m => (a -> b) -> m a -> m b
-l1 = fmap
+l1 f ma = ma >>= pure . f -- fmap
 -- 3
 l2 :: Monad m => (a -> b -> c) -> m a -> m b -> m c
 l2 = liftM2
