@@ -29,6 +29,7 @@ length1 = foldr ( (+) . (\_ -> 1) ) 0
 
 toList1 :: Foldable t => t a -> [a]
 toList1 = foldr (:) []
+       -- foldMap pure
 
 fold1 :: (Foldable t, Monoid m) => t m -> m
 fold1 = foldMap id
